@@ -1,12 +1,27 @@
 # =========================
-# Secrets / credentials
+# Environment files (secrets)
 # =========================
 .env
 .env.*
 *.env
+*.env.*
+**/.env
+**/.env.*
+**/*.env
+**/*.env.*
+
+# Allow templates / examples
+!**/env.template
+!**/.env.template
+!**/*.env.template
+!**/*.example
+!**/*.sample
+
+# =========================
+# Secrets / credentials
+# =========================
 secrets/
 **/secrets/
-**/*.secret
 **/*.key
 **/*private*
 **/*token*
@@ -14,12 +29,16 @@ secrets/
 **/*api_key*
 **/*credentials*
 
-# WireGuard / VPN configs (often contain private keys)
+# =========================
+# VPN configs (often contain private keys)
+# =========================
 **/wireguard/*.conf
 **/wg*.conf
 **/*.ovpn
 
-# TLS certs / ACME
+# =========================
+# TLS / ACME
+# =========================
 **/letsencrypt/
 **/*.pem
 **/*.crt
@@ -31,7 +50,6 @@ secrets/
 # Backups / dumps
 # =========================
 backups/
-**/backup/
 **/*backup*
 **/*.bak
 **/*.tar
@@ -39,7 +57,6 @@ backups/
 **/*.tgz
 **/*.zip
 **/*.7z
-**/*.gz
 **/*.sql
 **/*.sqlite
 **/*.sqlite3
@@ -47,17 +64,14 @@ backups/
 **/*.rdb
 
 # =========================
-# Docker runtime / data
-# (keep compose templates + docs, not live data dirs)
+# Docker runtime data (DO NOT COMMIT)
+# NPM data commonly lives in ./data/
 # =========================
 **/data/
 **/config/
 **/volumes/
 **/downloads/
 **/media/
-
-# Exception: allow documentation folders named "data" if you ever do that
-!docs/**/data/
 
 # =========================
 # OS / editor noise

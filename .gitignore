@@ -1,0 +1,71 @@
+# =========================
+# Secrets / credentials
+# =========================
+.env
+.env.*
+*.env
+secrets/
+**/secrets/
+**/*.secret
+**/*.key
+**/*private*
+**/*token*
+**/*apikey*
+**/*api_key*
+**/*credentials*
+
+# WireGuard / VPN configs (often contain private keys)
+**/wireguard/*.conf
+**/wg*.conf
+**/*.ovpn
+
+# TLS certs / ACME
+**/letsencrypt/
+**/*.pem
+**/*.crt
+**/*.cer
+**/*.p12
+**/*.pfx
+
+# =========================
+# Backups / dumps
+# =========================
+backups/
+**/backup/
+**/*backup*
+**/*.bak
+**/*.tar
+**/*.tar.gz
+**/*.tgz
+**/*.zip
+**/*.7z
+**/*.gz
+**/*.sql
+**/*.sqlite
+**/*.sqlite3
+**/*.db
+**/*.rdb
+
+# =========================
+# Docker runtime / data
+# (keep compose templates + docs, not live data dirs)
+# =========================
+**/data/
+**/config/
+**/volumes/
+**/downloads/
+**/media/
+
+# Exception: allow documentation folders named "data" if you ever do that
+!docs/**/data/
+
+# =========================
+# OS / editor noise
+# =========================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+

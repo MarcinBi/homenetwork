@@ -7,9 +7,10 @@
 # Roadmap
 
 ## Near-term
-- stabilize DNS using AdGuard Home
+- stabilize DNS using a new router
 - document macvlan limitations and workarounds
 - harden external Vaultwarden exposure
+- add features: Notes and Photos
 
 ## Mid-term
 - complete observability stack (Grafana, Loki, Promtail)

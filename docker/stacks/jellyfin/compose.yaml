@@ -1,0 +1,27 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+
+    environment:
+      - TZ=${TZ}
+
+      # Optional: user/group mapping (matches your current config)
+      - PUID=${PUID}
+      - PGID=${PGID}
+
+    volumes:
+      - ${JELLYFIN_CONFIG_DIR}:/config
+      - ${JELLYFIN_CACHE_DIR}:/cache
+      - ${JELLYFIN_MEDIA_DIR}:/media:ro
+
+    # If you use hardware acceleration, you can add device mappings later.
+    networks:
+      lan_macvlan:
+        ipv4_address: ${JELLYFIN_IPV4}
+
+networks:
+  lan_macvlan:
+    external: true
+

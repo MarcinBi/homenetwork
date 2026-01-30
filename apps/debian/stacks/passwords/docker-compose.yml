@@ -1,0 +1,31 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:1.33.2
+    container_name: vaultwarden
+    restart: unless-stopped
+
+    environment:
+      DOMAIN: "https://vault.sierra-117.net"
+      SIGNUPS_ALLOWED: "false"
+      INVITATIONS_ALLOWED: "true"
+      WEBSOCKET_ENABLED: "true"
+      TZ: "America/New_York"
+      # ADMIN_TOKEN should be provided via env file or secret manager, not committed:
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
+
+    volumes:
+      - /srv/docker/vaultwarden/data:/data
+
+    networks:
+      - proxy
+
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:80/alive >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+networks:
+  proxy:
+    external: true

@@ -1,0 +1,22 @@
+name: tiktokfin
+services:
+  jellyfin_tiktok:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin_tiktok
+    restart: unless-stopped
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: America/New_York
+    volumes:
+      - /volume1/docker/tiktokFin/config:/config
+      - /volume1/docker/tiktokFin/cache:/cache
+      - /volume1/Sunder:/data/tiktok
+    networks:
+      lan_macvlan:
+        ipv4_address: 192.168.8.211
+
+networks:
+  lan_macvlan:
+    external: true
+    name: lan_macvlan

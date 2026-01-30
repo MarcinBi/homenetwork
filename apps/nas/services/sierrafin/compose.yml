@@ -1,0 +1,24 @@
+name: sierrafin
+services:
+  sierrafin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: sierrafin
+    restart: unless-stopped
+    environment:
+      PUID: "1000"
+      PGID: "10"
+      TZ: America/New_York
+    volumes:
+      - /volume1/docker/sierrafin/config:/config
+      - /volume1/docker/sierrafin/cache:/cache
+      - /volume1/Media/Movies:/media/movies
+      - /volume1/Media/Episodes:/media/tv
+      - /volume1/Media/Music:/media/music
+    networks:
+      lan_macvlan:
+        ipv4_address: 192.168.8.50
+
+networks:
+  lan_macvlan:
+    external: true
+    name: lan_macvlan

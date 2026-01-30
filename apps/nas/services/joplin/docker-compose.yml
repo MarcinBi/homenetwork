@@ -1,0 +1,34 @@
+name: joplin
+services:
+  db:
+    image: postgres:16
+    container_name: joplin-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - /volume1/docker/joplin/data/postgres:/var/lib/postgresql/data
+
+  app:
+    image: joplin/server:latest
+    container_name: joplin-server
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_started
+    ports:
+      - "22300:22300"
+    environment:
+      APP_PORT: "22300"
+      APP_BASE_URL: ${APP_BASE_URL}
+      DB_CLIENT: pg
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+networks:
+  default:
+    name: joplin_default

@@ -1,6 +1,6 @@
 # Router
 
-Hardware: :contentReference[oaicite:0]{index=0} (OpenWrt-based)
+Hardware: GLi.Net Flint 2 (OpenWrt-based)
 
 This documentation is **intent-only** (public-safe). No IPs, keys, SSIDs, or hostnames.
 

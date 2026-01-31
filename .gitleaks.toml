@@ -1,0 +1,18 @@
+title = "homenetwork gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Allow common placeholders used in sanitized docs"
+regexes = [
+  '''REDACTED''',
+  '''CHANGEME''',
+  '''example\.internal''',
+  '''not-a-real-secret'''
+]
+paths = [
+  '''docs/''',
+  '''inventory/'''
+]
+

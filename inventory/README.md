@@ -1,7 +1,5 @@
 # Inventory
 
-Public-safe inventory of the homelab: **intent and roles**, not literal network details.
-
 ## Included
 - Host roles (router / server node / NAS)
 - Services and where they run

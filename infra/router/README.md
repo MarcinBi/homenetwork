@@ -1,24 +1,17 @@
-
 # Router
 
-Hardware: :contentReference[oaicite:0]{index=0}  
-Firmware family: OpenWrt-based (GL.iNet)
+Hardware: :contentReference[oaicite:0]{index=0} (OpenWrt-based)
 
-This folder documents router configuration at an **intent / design** level.
-No secrets or identifying network details are stored here.
+This documentation is **intent-only** (public-safe). No IPs, keys, SSIDs, or hostnames.
 
-## Goals
-- Segment the network into:
-  - **Trusted LAN** (admin devices + homelab nodes)
-  - **Guest / IoT** (smart TVs, untrusted clients)
-- Keep Guest isolated from LAN by default
-- Allow **a single, explicit exception** for media access (Guest → Jellyfin)
-- Run outbound VPN client (WireGuard, Proton) with policy routing
-- Run inbound WireGuard server for remote access into the home network
+## What it does
+- Splits network into:
+  - **Trusted LAN** (admin devices + servers)
+  - **Guest/IoT** (TVs, smart devices, untrusted clients)
+- Guest is isolated from LAN by default
+- One explicit exception: Guest can reach the media service (Jellyfin) only
+- Runs:
+  - WireGuard **client** (Proton VPN) with policy routing
+  - WireGuard **server** for remote access into the home network
 
-## What is intentionally excluded
-- Real IP ranges / internal IPs
-- SSIDs, Wi-Fi passwords
-- MAC addresses / DHCP reservation tables
-- WireGuard keys and peer details
-- Full firewall exports
+See: `policies.md`

@@ -1,17 +1,18 @@
-# Router
+# Inventory
 
-Hardware: GLi.Net Flint 2 (OpenWrt-based)
+Public-safe inventory of the homelab: **intent and roles**, not literal network details.
 
-This documentation is **intent-only** (public-safe). No IPs, keys, SSIDs, or hostnames.
+## Included
+- Host roles (router / server node / NAS)
+- Services and where they run
+- Access model (internal DNS + reverse proxy, VPN for remote access)
+- Trust model (LAN vs Guest/IoT)
 
-## What it does
-- Splits network into:
-  - **Trusted LAN** (admin devices + servers)
-  - **Guest/IoT** (TVs, smart devices, untrusted clients)
-- Guest is isolated from LAN by default
-- One explicit exception: Guest can reach the media service (Jellyfin) only
-- Runs:
-  - WireGuard **client** (Proton VPN) with policy routing
-  - WireGuard **server** for remote access into the home network
+## Excluded (kept private)
+- IP ranges, subnets, and exact host IPs
+- MAC addresses and DHCP reservation tables
+- Wi-Fi SSIDs and PSKs
+- VPN keys and peer configs
+- Real domain names if they map directly to internal services
+- Secrets, `.env` values, resolved compose output containing passwords
 
-See: `policies.md`

@@ -1,63 +1,59 @@
-# Homelab
+# 🧠 Home Network / Homelab
 
-Personal homelab documentation and infrastructure templates for a self-hosted home network.
+<p align="center">
+  <img alt="homelab" src="https://img.shields.io/badge/homelab-documented-brightgreen">
+  <img alt="docker" src="https://img.shields.io/badge/docker-compose-blue">
+  <img alt="dns" src="https://img.shields.io/badge/dns-adblock%20%2B%20local%20records-purple">
+  <img alt="reverse-proxy" src="https://img.shields.io/badge/reverse%20proxy-https%20everywhere-orange">
+  <img alt="status" src="https://img.shields.io/badge/status-iterating-yellow">
+</p>
 
-This repository documents the architecture, networking decisions, and services running in my home lab.  
-It is documentation-first and intentionally public-safe — no secrets, credentials, or sensitive identifiers are committed.
+A public, **sanitized** mirror of my home network + homelab setup.
+The goal: documentation that’s *actually useful* when something breaks, when I rebuild, or when I move hardware.
 
----
-
-## Overview
-
-This homelab is centered around a NAS-based Docker host with supporting client machines.  
-The primary goals are:
-
-- reliable self-hosted services
-- clean internal networking
-- secure remote access
-- clear documentation for rebuilds, expansion, and troubleshooting
+> **No secrets. No real addressing. No internal hostnames.**
+> Anything sensitive is represented as placeholders and intent.
 
 ---
 
-## Core Components
+## ✨ What’s in here
 
-### Hosts
-- **UGreen DXP2800 (NAS)**  
-  Primary storage and Docker host for all services.
+- **Router**: segmentation (trusted vs guest/IoT), VPN client + server, DHCP/DNS forwarding
+- **DNS**: local records + adblocking via :contentReference[oaicite:2]{index=2}
+- **Reverse proxy**: HTTPS termination + WebSockets via :contentReference[oaicite:3]{index=3}
+- **Core services**:
+  - Password manager: :contentReference[oaicite:4]{index=4}
+  - Media: :contentReference[oaicite:5]{index=5} (standard library + “short-form library” instance)
+  - Notes: :contentReference[oaicite:6]{index=6} server
+  - Monitoring: :contentReference[oaicite:7]{index=7} + :contentReference[oaicite:8]{index=8} / :contentReference[oaicite:9]{index=9} / :contentReference[oaicite:10]{index=10}
 
-- **Arch Linux workstation**  
-  Administration, development, and homelab management.
+- **Nodes**:
+  - Router: :contentReference[oaicite:11]{index=11} (based on :contentReference[oaicite:12]{index=12} concepts)
+  - “Debian server node”: :contentReference[oaicite:13]{index=13} (DNS / proxy / monitoring / passwords)
+  - NAS node: storage + media + self-hosted apps
 
-### Networking
-- **Reverse proxy:** Nginx Proxy Manager  
-  Used primarily for internal routing; select services are internet-facing.
-- **VPN:** WireGuard (split tunnel)  
-  Secure remote access to internal services.
-- **DNS:** AdGuard Home (planned universal DNS)  
-  Currently under migration due to router limitations.
-- **Container networking:**  
-  - macvlan for LAN-native services  
-  - bridge for internal-only services
-
-### Services (current)
-- Nginx Proxy Manager
-- Jellyfin
-- Vaultwarden (internet-facing)
-- AdGuard Home
-- WireGuard (wg-easy)
-- Uptime Kuma
-- Grafana / Loki / Promtail (work in progress)
+> Diagram + docs are meant to be “rebuild friendly”: if I wiped everything tomorrow, this repo should get me 80–90% of the way back.
 
 ---
 
-## Repository Structure
+## 🗺️ High-level architecture
 
-```text
-.
-├── docs/           # Architecture, networking, and runbooks
-├── inventory/      # Hardware and host inventory
-├── docker/         # Docker stacks and service documentation
-├── networking/     # Network-specific deep dives (macvlan, DNS, VPN)
-├── plans/          # Roadmap, known issues, and future work
-└── README.md
+```mermaid
+flowchart TB
+  internet((Internet))
+  router[Router<br/>Segmentation + VPN]
+  dns[DNS<br/>AdGuard Home]
+  proxy[Reverse Proxy<br/>Nginx Proxy Manager]
+  services[Internal Services<br/>Vaultwarden / Grafana / Uptime / etc.]
+  nas[NAS Apps<br/>Jellyfin / Joplin / storage]
+  clients[Clients<br/>Trusted + Guest/IoT]
 
+  internet --> router
+  router --> dns
+  router --> clients
+  dns --> proxy
+  proxy --> services
+  proxy --> nas
+
+  clients --> dns
+  clients --> proxy

@@ -42,7 +42,7 @@ This repo is meant to be “rebuild friendly”: if everything got wiped tomorro
 ```md
 ## Architecture
 
-![Homelab architecture](docs/diagrams/Home_Network_Diagram.drawio.svg)
+![Homelab architecture](docs/diagrams/architecture.png)
 
 <details>
 <summary>Mermaid source (optional)</summary>

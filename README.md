@@ -39,6 +39,13 @@ This repo is meant to be “rebuild friendly”: if everything got wiped tomorro
 ---
 
 ## 🗺️ High-level architecture
+```md
+## Architecture
+
+![Homelab architecture](docs/diagrams/Home_Network_Diagram.drawio.svg)
+
+<details>
+<summary>Mermaid source (optional)</summary>
 
 ```mermaid
 flowchart TB

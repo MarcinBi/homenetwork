@@ -38,32 +38,7 @@ This repo is meant to be “rebuild friendly”: if everything got wiped tomorro
 
 ---
 
-## 🗺️ High-level architecture
-```md
 ## Architecture
 
 ![Homelab architecture](docs/diagrams/architecture.png)
 
-<details>
-<summary>Mermaid source (optional)</summary>
-
-```mermaid
-flowchart TB
-  internet((Internet))
-  router[Router<br/>Segmentation + VPN]
-  dns[DNS<br/>AdGuard Home]
-  proxy[Reverse Proxy<br/>Nginx Proxy Manager]
-  services[Internal Services<br/>Vaultwarden / Monitoring / Etc.]
-  nas[NAS Apps<br/>Jellyfin / Joplin / Storage]
-  clients[Clients<br/>Trusted + Guest/IoT]
-
-  internet --> router
-  router --> dns
-  router --> clients
-
-  clients --> dns
-  clients --> proxy
-
-  dns --> proxy
-  proxy --> services
-  proxy --> nas

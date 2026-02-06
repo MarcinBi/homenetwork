@@ -40,5 +40,5 @@ This repo is meant to be “rebuild friendly”: if everything got wiped tomorro
 
 ## Architecture
 
-![Homelab architecture](docs/diagrams/architecture.png)
+![Homelab architecture](docs/architecture/architecture.png)
 
